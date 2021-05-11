@@ -12,6 +12,6 @@ Currency_db_save
 - crawl data from Korea's hana bank using selinium and BeautifulSoup
 - Input data: 2021-01-01 Out put: 2021-01-01's currency data EURO, CHN, JPN, USD in Korean won
 
-Excel_ave
+Excel_save
 
 -save Excel data to your database
