@@ -1,4 +1,4 @@
- Prophet model
+# Prophet model
 - DB is private and data forms are int(255)
 - Change DB to yours to fit the model
 - ds: date  yhat: predicted value  yhat_lower: predicted value low  yhat_upper: predicted value high in 95% range
