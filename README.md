@@ -1,7 +1,10 @@
 ## Data Science
-* Analysis using deeplearning models
+1. Prophet project
+* Analysis using Prophet models
 * find insight, predict
+2. 
 
 ## Data_Python
-* simple components done by python
-* useful crawling and ETL codes
+1. simple components done by python
+2. useful crawling and ETL codes
+3. Naver data crawling and turn it into excel form
