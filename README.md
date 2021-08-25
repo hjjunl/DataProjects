@@ -10,6 +10,6 @@
  * save data in the database every 10:20 a.m
 ### 2. Exchange rate Crawling (past data)
 * Crawl data from 2001-01-10 to 2020-12-10(monthly)
-### 3. Naver data crawling and turn it into excel form
+### 3. Naver news data crawling
 * Crawl news data from Naver news
 * Save data as a Excel file
