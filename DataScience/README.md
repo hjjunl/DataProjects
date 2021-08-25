@@ -6,5 +6,6 @@
 - Black line is the actual data, blue line is predicted data, sky blue color range is the range in 95% accuracy
 
 2. Multivariable model
-- Using other varible that affects cost data prediction
+- Using other varible that affects cost data prediction (variable cost, fixed cost, material cost, exchange rate, interest rate)
+- add_regression to predict 12 months
 
