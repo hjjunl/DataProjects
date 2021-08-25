@@ -1,8 +1,8 @@
 ## Data Science
-### 1. Prophet project
+### 1. Prophet project (for Manufacturing company income)
 * Analysis using Prophet models
 * To find insight, predict future income.
-### 2. 
+* Two types (single variable, multivariate variables)
 
 ## Data_Python
 ### 1. Exchange rate ETL automation (dalily)
