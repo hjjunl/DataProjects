@@ -18,3 +18,9 @@
 
 - Save Excel data to your database
 - You need your database structure before this. 
+  
+ ### Naver news data crawling
+  
+- Using selenium to get data crawling automation
+- Change data into Excel form
+- Data paste avaliable
