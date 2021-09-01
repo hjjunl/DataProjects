@@ -1,0 +1,118 @@
+-- --------------------------------------------------------
+-- 호스트:                          127.0.0.1
+-- 서버 버전:                        10.6.4-MariaDB - mariadb.org binary distribution
+-- 서버 OS:                        Win64
+-- HeidiSQL 버전:                  11.3.0.6295
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- 테이블 testdb.department 구조 내보내기
+CREATE TABLE IF NOT EXISTS `department` (
+  `department_key` int(11) NOT NULL AUTO_INCREMENT,
+  `department_name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`department_key`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.department:~4 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT IGNORE INTO `department` (`department_key`, `department_name`) VALUES
+	(1, 'IT'),
+	(2, 'HR'),
+	(3, 'Manufacturing'),
+	(4, 'R&D');
+/*!40000 ALTER TABLE `department` ENABLE KEYS */;
+
+-- 테이블 testdb.payment_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `payment_info` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `badge_id` int(11) DEFAULT NULL,
+  `payment` int(11) DEFAULT NULL,
+  `payment_type` varchar(30) DEFAULT NULL,
+  `payment_date` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`payment_id`),
+  KEY `badge_id` (`badge_id`),
+  CONSTRAINT `payment_info_ibfk_1` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.payment_info:~8 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `payment_info` DISABLE KEYS */;
+INSERT IGNORE INTO `payment_info` (`payment_id`, `badge_id`, `payment`, `payment_type`, `payment_date`) VALUES
+	(1, 435656, 3800000, 'Monthly payment', '2021-09-01 10:03:42'),
+	(2, 435646, 16000000, 'Monthly payment', '2021-09-01 10:03:44'),
+	(3, 435645, 2000000, 'Monthly payment', '2021-09-01 10:03:46'),
+	(4, 435644, 4000000, 'Monthly payment', '2021-09-01 10:03:47'),
+	(5, 435642, 3500000, 'Monthly payment', '2021-09-01 10:03:48'),
+	(6, 435656, 800000, 'Bonus payment', '2021-09-01 10:05:37'),
+	(7, 435647, 40000000, 'Monthly payment', '2021-09-01 10:47:42'),
+	(8, 435678, 80000000, 'BONUS', '2021-09-01 11:06:01');
+/*!40000 ALTER TABLE `payment_info` ENABLE KEYS */;
+
+-- 테이블 testdb.user_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_info` (
+  `BADGE` int(11) NOT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `department` int(11) DEFAULT NULL,
+  `join_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `gender` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '남',
+  `position` varchar(20) CHARACTER SET utf8mb4 DEFAULT '사원',
+  PRIMARY KEY (`BADGE`),
+  KEY `department` (`department`),
+  CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`department`) REFERENCES `department` (`department_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.user_info:~13 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
+INSERT IGNORE INTO `user_info` (`BADGE`, `name`, `department`, `join_date`, `gender`, `position`) VALUES
+	(434343, 'paul', 1, '2021-08-30 16:43:42', '남', '수석'),
+	(434350, 'hjl', 2, '2021-08-30 16:57:36', '남', '사원'),
+	(434357, 'HyeSu', 2, '2021-09-01 13:13:03', '여', '사원'),
+	(435642, 'DaHye', 1, '2021-08-30 11:43:08', '여', '사원'),
+	(435643, 'HyunJun', 1, '2021-08-30 11:49:58', '남', '사원'),
+	(435644, 'JinHo', 3, '2021-08-30 11:43:08', '남', '사원'),
+	(435645, 'ChanHo', 4, '2021-08-30 11:43:08', '남', '사원'),
+	(435646, 'JunHo', 2, '2021-08-30 11:43:08', '남', '사원'),
+	(435647, 'Worney', 1, '2021-08-30 16:03:30', '여', '책임'),
+	(435648, 'Jenny', 3, '2021-08-30 16:15:10', '여', '수석'),
+	(435656, 'Fred', 4, '2021-08-31 11:30:47', '남', '사원'),
+	(435678, 'Alis', 2, '2021-09-01 11:01:52', '여', '수석'),
+	(436767, 'Kevin', 4, '2021-08-31 13:14:12', '남', '팀장');
+/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
+
+-- 테이블 testdb.user_score 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_score` (
+  `user_tb_id` int(11) NOT NULL AUTO_INCREMENT,
+  `badge_id` int(11) DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
+  `test_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `test_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`user_tb_id`),
+  KEY `badge_id` (`badge_id`),
+  CONSTRAINT `user_score_ibfk_1` FOREIGN KEY (`badge_id`) REFERENCES `user_info` (`BADGE`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+-- 테이블 데이터 testdb.user_score:~11 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `user_score` DISABLE KEYS */;
+INSERT IGNORE INTO `user_score` (`user_tb_id`, `badge_id`, `score`, `test_date`, `test_type`) VALUES
+	(1, 435645, 89, '2021-09-01 09:41:58', 'MID'),
+	(2, 434343, 98, '2021-09-01 09:41:58', 'FINAL'),
+	(3, 435642, 90, '2021-09-01 09:41:58', 'MID'),
+	(4, 434350, 100, '2021-09-01 09:41:58', 'EXTRA'),
+	(5, 435647, 90, '2021-09-01 09:41:58', 'FINAL'),
+	(6, 435646, 96, '2021-09-01 09:41:58', 'MID'),
+	(7, 435644, 77, '2021-09-01 09:41:58', 'EXTRA'),
+	(8, 435656, 70, '2021-09-01 09:41:58', 'EXTRA'),
+	(9, 436767, 97, '2021-09-01 09:41:58', 'MID'),
+	(10, 435645, 90, '2021-09-01 09:41:58', 'EXTRA'),
+	(11, 435648, 1000, '2021-09-01 09:41:58', 'FINAL');
+/*!40000 ALTER TABLE `user_score` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
