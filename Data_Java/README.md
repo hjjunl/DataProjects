@@ -10,3 +10,5 @@
 ### <3>. db_use.java
 - db 테이블에 접근하여 쿼리문을 통해 데이터 select, insert
 - 중복된 클래스여서 따로 처리
+- ![image](https://user-images.githubusercontent.com/50603209/131627316-2822b6e5-f214-484b-8385-d4a6aa30a074.png)
+
