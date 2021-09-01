@@ -8,6 +8,7 @@
 - Fit the data format to db format (int, varchar...)
 - Use pymysql for insertion
 - Use schedulers for automation (every 10:30 a.m) 
+![image](https://user-images.githubusercontent.com/50603209/131627788-1621daa0-3676-4ec8-b227-f5cbac04316f.png)
 
 ### Currency_db_save
 
