@@ -8,4 +8,5 @@
 ### 2. Multivariable model
 - Using other varible that affects cost data prediction (variable cost, fixed cost, material cost, exchange rate, interest rate)
 - add_regression to predict 12 months
+![image](https://user-images.githubusercontent.com/50603209/131627531-30e19baf-50e5-483c-9b38-bf52cb4a116c.png)
 
