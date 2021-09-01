@@ -1,4 +1,4 @@
-## 1. JAVA와 Mariadb를 사용한 사원 급여 프로그램 (인사)
+## 1. JAVA&Mariadb Project (사원 급여 프로그램)
 
 ## <1>. db_sql
 - 로컬에서 쿼리를 실행 시키면 테이블과 tutorial 정보가 저장
