@@ -13,3 +13,6 @@
 ### 3. Naver news data crawling
 * Crawl news data from Naver news
 * Save data as a Excel file
+## Data_Java_SQL
+* SELECT, INSERT, JOIN, SUM, MAX, MIN
+* Example query for tutorial(employee salary program)
