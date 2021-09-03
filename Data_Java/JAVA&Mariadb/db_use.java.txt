@@ -1,5 +1,6 @@
 import java.awt.List;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,76 +8,186 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class db_use {
-	PreparedStatement pstmt1 = null;
-	String url = "jdbc:mariadb://127.0.0.1:3306/testdb";
-	public static Object getResultValue(int columnType, String columnName, ResultSet rs) throws SQLException {
-		  if (columnType == Types.NUMERIC || columnType == Types.INTEGER || columnType == Types.BIGINT) {
-		    return rs.getInt(columnName);
+	static PreparedStatement pstmt1 = null;
+	static PreparedStatement pstmt = null;
 
-		  } else if (columnType == Types.DOUBLE || columnType == Types.FLOAT) {
-		    return rs.getDouble(columnName);
+	static String url = "jdbc:mariadb://127.0.0.1:3306/testdb";
 
-		  } else if (columnType == Types.CHAR || columnType == Types.VARCHAR || columnType == Types.NVARCHAR) {
-		    return rs.getString(columnName);
+	// 테이블 명 조회
+	public static void getDatabaseMetaData(Connection con) {
+		try {
 
-		  } else {
-		    // 그 외의 경우는 전부 String 처리
-		    return rs.getString(columnName);
-		  }
+			DatabaseMetaData dbmd = (DatabaseMetaData) con.getMetaData();
+			String[] types = { "TABLE" };
+			ResultSet rs = dbmd.getTables(null, null, "%", types);
+			while (rs.next()) {
+				System.out.print("<" + rs.getString("TABLE_NAME") + "> ");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	}
+
+	public static Object getResultValue(int columnType, String columnName, ResultSet rs) throws SQLException {
+		if (columnType == Types.NUMERIC || columnType == Types.INTEGER || columnType == Types.BIGINT) {
+			return rs.getInt(columnName);
+
+		} else if (columnType == Types.DOUBLE || columnType == Types.FLOAT) {
+			return rs.getDouble(columnName);
+
+		} else if (columnType == Types.CHAR || columnType == Types.VARCHAR || columnType == Types.NVARCHAR) {
+			return rs.getString(columnName);
+
+		} else {
+			// 그 외의 경우는 전부 String 처리
+			return rs.getString(columnName);
+		}
+	}
+
+	public static void insertion(String table) throws SQLException {
+		Connection con = DriverManager.getConnection(url, "root", "2000");
+		Connection con1 = DriverManager.getConnection(url, "root", "2000");
+		java.util.Date utilDate = new Date();
+		java.sql.Date date = new java.sql.Date(utilDate.getTime());
+
+		Scanner scan = new Scanner(System.in);
+		String sel = "SELECT * FROM ";
+		String SQL = sel.concat(table);
+		// select 문
+		pstmt = con.prepareStatement(SQL);
+		ResultSet rs1 = pstmt.executeQuery();
+		ResultSetMetaData rsmd1 = rs1.getMetaData();
+		// column 개수
+		int numberOfColumns = rsmd1.getColumnCount();
+		// insert 문
+		String sql_insert = "INSERT INTO ";
+		String col = "";
+		StringBuilder questionmark = new StringBuilder("");
+		StringBuilder sb = new StringBuilder("");
+		StringBuilder col_name = new StringBuilder("");
+		sql_insert = sql_insert.concat(table).concat(" (");
+
+		// column명 type확인
+		ArrayList<Map> columnList = new ArrayList<>();
+		for (int i = 1; i <= numberOfColumns; i++) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("name", rsmd1.getColumnName(i));
+			map.put("type", rsmd1.getColumnType(i));
+			columnList.add(map);
+		}
+
+		// insert문 완성
+		for (int i = 0; i < numberOfColumns; i++) {
+			Map columnInfo = columnList.get(i);
+			String columnName = (String) columnInfo.get("name");
+			if (i == numberOfColumns - 1) {
+				col_name.append(columnName);
+				sb.append(columnName);
+				sb.append(") VALUES (");
+				questionmark.append("?)");
+			} else if (i < numberOfColumns - 1) {
+				col_name.append(columnName + ", ");
+				sb.append(columnName);
+				sb.append(", ");
+				questionmark.append("?, ");
+			}
+		}
+		// 쿼리문 완성
+		sql_insert = sql_insert.concat(sb.toString());
+		sql_insert = sql_insert.concat(questionmark.toString());
+		String sql_i = sql_insert;
+		System.out.println("To main: 0, Input: " + col_name);
+		// 기존 연결 제거
+		con.close();
+		rs1.close();
+
+		// 쿼리문 실행
+		pstmt1 = con1.prepareStatement(sql_i);
+
+		for (int i = 0; i < numberOfColumns; i++) {
+			Map columnInfo = columnList.get(i);
+			String columnName = (String) columnInfo.get("name");
+			int columnType = (int) columnInfo.get("type");
+			int inte = 0;
+			if (columnType == 4) {
+
+				System.out.print("Insert " + columnName + " (Integer): ");
+				inte = scan.nextInt();
+				pstmt1.setInt(i + 1, inte);
+			} else if (columnType == 12) {
+				System.out.print("Insert " + columnName + " (String): ");
+				String str = scan.next();
+				pstmt1.setString(i + 1, str);
+			} else if (columnType == 93) {
+				System.out.println("Today: " + "(" + columnName + ")" + date);
+				pstmt1.setDate(i + 1, date);
+			} else {
+				continue;
+			}
+
+		}
+		pstmt1.executeUpdate();
+		con1.close();
+
+	}
+
 	// 계산한다.
 	public void db_func(String sql, int choose) throws SQLException {
+
 		Connection con = DriverManager.getConnection(url, "root", "2000");
-		pstmt1  = con.prepareStatement(sql);
-		ResultSet rs = pstmt1.executeQuery();
-		ResultSetMetaData rsmd1 = rs.getMetaData();
+		try (PreparedStatement pstmt1 = con.prepareStatement(sql)) {
+			con.setAutoCommit(false);
+			ResultSet rs = pstmt1.executeQuery();
+			ResultSetMetaData rsmd1 = rs.getMetaData();
 
-		int numberOfColumns=rsmd1.getColumnCount();
-		
-		  ArrayList<Map> columnList = new ArrayList<>();
+			int numberOfColumns = rsmd1.getColumnCount();
 
-		  for (int i = 1; i <= numberOfColumns; i++) {
-		    Map<String, Object> map = new HashMap<>();
-		    map.put("name", rsmd1.getColumnName(i));
-		    map.put("type", rsmd1.getColumnType(i));
-		    columnList.add(map);
-		  }
-		  int k=1;
-		  if (choose!=1) {
-		  while (rs.next()) {
-			  System.out.println("<"+k+">");
-			    for (int i = 0; i < numberOfColumns; i++) {
-			      Map columnInfo = columnList.get(i);
-			      String columnName = (String) columnInfo.get("name");
-			      int columnType = (int) columnInfo.get("type");
+			ArrayList<Map> columnList = new ArrayList<>();
 
-			      Object obj = getResultValue(columnType, columnName, rs);
-			      System.out.println(i+1+". "+ columnName+": "+ obj);
-			    }
-			    k+=1;
-			    System.out.println("\n");
+			for (int i = 1; i <= numberOfColumns; i++) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("name", rsmd1.getColumnName(i));
+				map.put("type", rsmd1.getColumnType(i));
+				columnList.add(map);
+			}
+			int k = 1;
+			if (choose != 1) {
+				while (rs.next()) {
+					System.out.println("<" + k + ">");
+					for (int i = 0; i < numberOfColumns; i++) {
+						Map columnInfo = columnList.get(i);
+						String columnName = (String) columnInfo.get("name");
+						int columnType = (int) columnInfo.get("type");
+						Object obj = getResultValue(columnType, columnName, rs);
+						System.out.println(i + 1 + ". " + columnName + ": " + obj);
+					}
+					k += 1;
+					System.out.println("\n");
 
-		  }
-		  }
-		  else if (choose==1) {
-			  while (rs.next()) {
-				    for (int i = 0; i < numberOfColumns; i++) {
-				      Map columnInfo = columnList.get(i);
-				      String columnName = (String) columnInfo.get("name");
-				      int columnType = (int) columnInfo.get("type");
+				}
+			} else if (choose == 1) {
+				while (rs.next()) {
+					for (int i = 0; i < numberOfColumns; i++) {
+						Map columnInfo = columnList.get(i);
+						String columnName = (String) columnInfo.get("name");
+						int columnType = (int) columnInfo.get("type");
+						Object obj = getResultValue(columnType, columnName, rs);
+						System.out.println(obj);
 
-				      Object obj = getResultValue(columnType, columnName, rs);
-				      System.out.println(obj);
-				    }
-			  }
-		  }
-		  con.close();
-		  rs.close();
-		  
+					}
+				}
+			}
+			con.commit();
+			con.close();
+			rs.close();
+		}
+
 	}
+
 }
-	
