@@ -11,7 +11,7 @@
 - db 테이블에 접근하여 쿼리문을 통해 데이터 select, insert
 - 중복된 클래스여서 따로 처리
 - 테이블 명을 치면 자동으로 insertion 가능
-- you don't have to setInt, setString, etc for insertion this program verifies the column type and automatically set data in its type
+- You don't have to setInt, setString, etc for insertion. This program verifies the column type and automatically set data in its type.
 ![image](https://user-images.githubusercontent.com/50603209/131957482-bab4a153-c1a0-46c4-bffb-60cb2c92101d.png)
 
 
