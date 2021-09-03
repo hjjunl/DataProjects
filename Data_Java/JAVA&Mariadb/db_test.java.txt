@@ -1,5 +1,6 @@
 import java.lang.Thread.State;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-
 public class dbtest {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -22,252 +22,119 @@ public class dbtest {
 		PreparedStatement pstmt1 = null;
 		String url = "jdbc:mariadb://127.0.0.1:3306/testdb";
 		Scanner scan = new Scanner(System.in);
-		int loop=0;
-		
-		while (loop==0) {
-			
-		
-                // 클래스를 객체화, 드라이버를 로드
-		Class.forName("org.mariadb.jdbc.Driver");
-                // 실행 도구 생성
-		Connection con = DriverManager.getConnection(url, "root", "2000");
-                // 연결 객체를 얻음
-		Statement st = con.createStatement();
-                // 쿼리를 실행하여 결과 집합을 얻어온다.
-		
-		System.out.println("1.직원입력   2.직원 고과정보 입력  3. 급여 입력   4.조회: " );
-		int choose=scan.nextInt();
-		db_use d = new db_use();
-//		d.db_func("select * from user_info");
-		//쿼리 1, 2, 3
-		if (choose==1) {
-			try {
-			String SQL = "insert into user_info (BADGE, name, department, gender, position) values(?, ?, ?, ?, ?)";
-			String BADGE_exist="select BADGE from user_info";
-			System.out.println("Exsisting BADGE");			  
+		int loop = 0;
 
-			d.db_func(BADGE_exist, choose);
-			System.out.println("Input ex). 434356 HyunJunLee 1 남 사원");
-			System.out.print("To main: 0 (Input) 사번 이름 부서 성별 직책 : ");
-			pstmt  = con.prepareStatement(SQL);
-			
-			int user_key=scan.nextInt();
-			if (user_key==0) {
-				continue;
-			}
-			else{
-			String user_name = scan.next();
-			int dep_num = scan.nextInt();
-			String gender = scan.next();
-			String position = scan.next();
+		while (loop == 0) {
 
-			pstmt.setInt(1, user_key); 
-			pstmt.setString(2, user_name); 
-			pstmt.setInt(3, dep_num);
-			pstmt.setString(4, gender);
-			pstmt.setString(5, position);
+			// 클래스를 객체화, 드라이버를 로드
+			Class.forName("org.mariadb.jdbc.Driver");
+			// 실행 도구 생성
+			Connection con = DriverManager.getConnection(url, "root", "2000");
+			// 연결 객체를 얻음
+			Statement st = con.createStatement();
+			// 쿼리를 실행하여 결과 집합을 얻어온다.
 
-			int r = pstmt.executeUpdate(); 
-			System.out.println("변경된 row : " + r);
+			System.out.println("1.Data Insertion   2. Selection  (type 'quit' to main)");
+			int choose = scan.nextInt();
+			db_use d = new db_use();
 
-			st.close();
-			con.close();
-			System.out.println("Again?: 1 Break: 0");
-			int continue1=scan.nextInt();
-			if(continue1==1) {
-				continue;
-			}
-			else {
-				System.out.print("DONE");
-				return;
-			}
-			} 
-			}
-			catch (SQLException e) { 
-				System.out.println("[SQL Error : " + e.getMessage() + "]"); 
-			} 
-			finally 
-			{
-			if (pstmt != null) { 
-				try { pstmt.close(); 
-				} catch (SQLException e) { 
-					e.printStackTrace(); 
-					} 
-				} 
-			if (con != null) 
-				{
-					try { con.close(); } 
-					catch (SQLException e) 
-					{
-						e.printStackTrace(); 
+			// 쿼리 1, 2, 3
+			if (choose == 1) {
+				try {
+					System.out.print("Table list-> ");
+					d.getDatabaseMetaData(con);
+					System.out.println("");
+					System.out.print("Type column names: ");
+					String table = scan.next();
+					if (table.equals("quit")) {
+						continue;
+					} else {
+						d.insertion(table);
+						System.out.println("Again?: 1 Break: 0");
+						int continue1 = scan.nextInt();
+						if (continue1 == 1) {
+							continue;
+						} else {
+							System.out.print("DONE");
+							return;
+						}
 					}
-				} 
-			} 
-		}
-		else if (choose==2) {
-			try {
-			String SQL = "insert into user_score (badge_id, score) values(?, ?)";
-			System.out.print("To main press 0 (입력) 사번 점수 : ");
-			pstmt  = con.prepareStatement(SQL);
+				}
 
-			int badge_id=scan.nextInt();
-			if (badge_id==0) {
-				continue;
-			}
-			else{
-			int score = scan.nextInt();
-
-			pstmt.setInt(1, badge_id); 
-			pstmt.setInt(2, score); 
-
-			int r = pstmt.executeUpdate(); 
-			System.out.println("변경된 row : " + r);
-
-			st.close();
-			con.close();
-			int continue1=scan.nextInt();
-			if(continue1==1) {
-				continue;
-			}
-			else {
-				System.out.print("DONE");
-				return;
-			}
-			}
-			}
-			catch (SQLException e) { 
-				System.out.println("[SQL Error : " + e.getMessage() + "]"); 
-			} 
-			finally {
-			if (pstmt != null) { 
-				try { pstmt.close();} 
-				catch (SQLException e) { 
-					e.printStackTrace(); 
-					} 
-				} 
-			if (con != null) 
-				{
-					try { con.close(); } 
-					catch (SQLException e) 
-					{
-						e.printStackTrace(); 
+				catch (SQLException e) {
+					System.out.println("[SQL Error : " + e.getMessage() + "]");
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
 					}
-				} 
-			} 
-		}
-		else if (choose==3) {
-			try {
-			String SQL = "insert into payment_info (badge_id, payment, payment_type) values(?, ?, ?)";
-			System.out.print("To main press 0 (입력) 사번 급여 급여종류 : ");
-			pstmt  = con.prepareStatement(SQL);
-			
-			int badge_id=scan.nextInt();
-			if (badge_id==0) {
-				continue;
-			}
-			else{
-			int payment = scan.nextInt();
-			String payment_type = scan.next();
-
-			pstmt.setInt(1, badge_id); 
-			pstmt.setInt(2, payment); 
-			pstmt.setString(3, payment_type);
-
-			int r = pstmt.executeUpdate(); 
-			System.out.println("변경된 row : " + r);
-
-			st.close();
-			con.close();
-			int continue1=scan.nextInt();
-			if(continue1==1) {
-				continue;
-			}
-			else {
-				System.out.print("DONE");
-				return;
-			}
-			} 
-			}
-			catch (SQLException e) { 
-				System.out.println("[SQL Error : " + e.getMessage() + "]"); 
-			} 
-			finally 
-			{
-			if (pstmt != null) { 
-				try { pstmt.close(); 
-				} catch (SQLException e) { 
-					e.printStackTrace(); 
-					} 
-				} 
-			if (con != null) 
-				{
-					try { con.close(); } 
-					catch (SQLException e) 
-					{
-						e.printStackTrace(); 
+					if (con != null) {
+						try {
+							con.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
 					}
-				} 
-			} 
+				}
+			} else if (choose == 2) {
+				System.out.print("(Input) AVG MAX MIN EMPLOYEE ALL: ");
+				// 전체 구조
+				String ALL = "select user_info.name, d.department_name , user_score.score, pi2.payment, pi2.payment_type, user_info.gender from user_info left outer join department d on user_info.department = d.department_key\r\n"
+						+ "inner join user_score on user_info.BADGE =user_score.badge_id left outer join payment_info pi2 on user_info.BADGE = pi2.badge_id; ";
+				// 부서별 평균점수
+				String AVG = "select department.department_name as 'DEPARTMENT', AVG(score) from user_info left outer join department on user_info.department = department.department_key "
+						+ "left outer join user_score on user_info.BADGE =user_score.badge_id group by department ;";
+				// 최고점
+				// 최고점
+				String MAX = "select a.uname, a.department_name, s.score\r\n" + "from user_score s inner join\r\n"
+						+ "       (select user_info.BADGE, user_info.name as uname, department.department_key, department.department_name \r\n"
+						+ "       from user_info inner join department on user_info.department = department.department_key) as a\r\n"
+						+ "on s.badge_id = a.BADGE\r\n"
+						+ "where s.score in (select MAX(ss.score) from user_score ss inner join user_info uu on ss.badge_id = uu.BADGE group by uu.department);";
+				// 최저점
+				String MIN = "select a.uname, a.department_name, s.score\r\n" + "from user_score s inner join\r\n"
+						+ "       (select user_info.BADGE, user_info.name as uname, department.department_key, department.department_name \r\n"
+						+ "       from user_info inner join department on user_info.department = department.department_key) as a\r\n"
+						+ "on s.badge_id = a.BADGE\r\n"
+						+ "where s.score in (select MIN(ss.score) from user_score ss inner join user_info uu on ss.badge_id = uu.BADGE group by uu.department);";// 부서별
+																																									// 직원수
+				String EMPLOYEE = "select department.department_name as 'Department' , count(user_info.name) as \"Number of employee\" from user_info left outer join department on user_info.department = department.department_key group by department.department_name ;";
+				String query = "";
+				// 입력
+				String choice = scan.next();
+				if (choice.equals("quit")) {
+					continue;
+				} else {
+					System.out.print(choice);
+					if (choice.equals("AVG")) {
+						choice = AVG;
+					} else if (choice.equals("MAX")) {
+						choice = MAX;
+					} else if (choice.equals("MIN")) {
+						choice = MIN;
+					} else if (choice.equals("EMPLOYEE")) {
+						choice = EMPLOYEE;
+					} else if (choice.equals("ALL")) {
+						choice = ALL;
+					}
+					d.db_func(choice, choose);
+					System.out.println("Press quit to main. ");
+					System.out.println("Press DONE to end. ");
+
+					String continue1 = scan.next();
+					if (continue1.equals("quit")) {
+						continue;
+					} else if (continue1.equals("DONE")) {
+						System.out.print("DONE");
+						return;
+					} else {
+						return;
+					}
+				}
+			}
 		}
-		else if (choose==4) {
-		System.out.print("Press q to main(입력) AVG MAX MIN EMPLOYEE ALL: ");
-		//전체 구조
-		String ALL="select user_info.name, d.department_name , user_score.score, pi2.payment, pi2.payment_type, user_info.gender from user_info left outer join department d on user_info.department = d.department_key\r\n" + 
-				"inner join user_score on user_info.BADGE =user_score.badge_id left outer join payment_info pi2 on user_info.BADGE = pi2.badge_id; ";
-		//부서별 평균점수	
-		String AVG="select department.department_name as 'DEPARTMENT', AVG(score) from user_info left outer join department on user_info.department = department.department_key "
-				+ "left outer join user_score on user_info.BADGE =user_score.badge_id group by department ;";
-     	//최고점
-     	//최고점
-		String MAX= "select a.uname, a.department_name, s.score\r\n" + 
-				"from user_score s inner join\r\n" + 
-				"       (select user_info.BADGE, user_info.name as uname, department.department_key, department.department_name \r\n" + 
-				"       from user_info inner join department on user_info.department = department.department_key) as a\r\n" + 
-				"on s.badge_id = a.BADGE\r\n" + 
-				"where s.score in (select MAX(ss.score) from user_score ss inner join user_info uu on ss.badge_id = uu.BADGE group by uu.department);";
-		//최저점
-		String MIN="select a.uname, a.department_name, s.score\r\n" + 
-				"from user_score s inner join\r\n" + 
-				"       (select user_info.BADGE, user_info.name as uname, department.department_key, department.department_name \r\n" + 
-				"       from user_info inner join department on user_info.department = department.department_key) as a\r\n" + 
-				"on s.badge_id = a.BADGE\r\n" + 
-				"where s.score in (select MIN(ss.score) from user_score ss inner join user_info uu on ss.badge_id = uu.BADGE group by uu.department);";//부서별 직원수
-		String EMPLOYEE="select department.department_name as 'Department' , count(user_info.name) as \"Number of employee\" from user_info left outer join department on user_info.department = department.department_key group by department.department_name ;";
-		String query="";
-		//입력
-		String choice =scan.next();
-		if (choice.equals("q")) {
-			continue;
-		}
-		else{
-		System.out.print(choice);
-		if(choice.equals("AVG")) {
-			choice=AVG;
-		}
-		else if(choice.equals("MAX")) {
-			choice=MAX;
-		}
-		else if(choice.equals("MIN")) {
-			choice=MIN;
-		}
-		else if(choice.equals("EMPLOYEE")) {
-			choice=EMPLOYEE;
-		}
-		else if(choice.equals("ALL")) {
-			choice=ALL;
-		}
-		d.db_func(choice, choose);
-		System.out.print("Press 1 to main");
-		int continue1=scan.nextInt();
-		if(continue1==1) {
-			continue;
-		}
-		else {
-			System.out.print("DONE");
-			return;
-		}
-		}
-		}
-		}
-		}
+	}
 }
