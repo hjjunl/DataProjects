@@ -12,6 +12,5 @@
 - 중복된 클래스여서 따로 처리
 - 테이블 명을 치면 자동으로 insertion 가능
 - You don't have to setInt, setString, etc for insertion. This program verifies the column type and automatically set data in its type.
-![image](https://user-images.githubusercontent.com/50603209/131957482-bab4a153-c1a0-46c4-bffb-60cb2c92101d.png)
-
+![image](https://user-images.githubusercontent.com/50603209/131972006-cca69bb2-b47b-41a4-a2ef-a435060fea12.png)
 
