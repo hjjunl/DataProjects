@@ -30,3 +30,14 @@
 - Using selenium to get data crawling automation
 - Change data into Excel form
 - Data paste avaliable
+
+  ### Gragh automation and data concatnation
+  
+- Find data start with [1~[20
+- Grouping the data as a same csv file if the number is same
+- Handling the data into the style I like.
+- Make the graph automatically (scatter graph)
+  - (Data set,           Result graph)
+  
+  ![image](https://user-images.githubusercontent.com/50603209/133026964-1eae1d25-dec0-40ea-b15d-425277dd238c.png) ![image](https://user-images.githubusercontent.com/50603209/133028536-65e95d65-5366-4fa7-b141-fc6bb20e1f4f.png)
+
