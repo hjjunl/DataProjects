@@ -13,6 +13,9 @@
 ### 3. Naver news data crawling
 * Crawl news data from Naver news
 * Save data as a Excel file
+### 4. Data concatnation and Graph automation
+* Make several data into one csv file
+* Draw graph (scatter graph)
 ## Data_Java_SQL
 * SELECT, INSERT, JOIN, SUM, MAX, MIN
 * Example query for tutorial(employee salary program)
