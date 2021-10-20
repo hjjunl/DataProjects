@@ -16,6 +16,12 @@
 ### 4. Data concatnation and Graph automation
 * Make several data into one csv file
 * Draw graph (scatter graph)
+### 5. Korean IT company info crawling (jobplanet.co.k)
+* Crawling IT companies info from Korean job application site
+* 기업명, 평균 별점, 평균연봉, 기업 조회수, 복지 및 급여, 업무와 삶의 균형, 사내문화...etc
+* Useful for recommendation system and company analysis
+* row:3306, col: 12
 ## Data_Java_SQL
+### 1. Simple Employ project
 * SELECT, INSERT, JOIN, SUM, MAX, MIN
 * Example query for tutorial(employee salary program)
