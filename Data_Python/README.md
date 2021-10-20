@@ -31,7 +31,7 @@
 - Change data into Excel form
 - Data paste avaliable
 
-  ### Gragh automation and data concatnation
+### Gragh automation and data concatnation
   
 - Find data start with [1~[20
 - Grouping the data as a same csv file if the number is same
@@ -40,4 +40,10 @@
   - (Data set,           Result graph)
   
   ![image](https://user-images.githubusercontent.com/50603209/133026964-1eae1d25-dec0-40ea-b15d-425277dd238c.png) ![image](https://user-images.githubusercontent.com/50603209/133028536-65e95d65-5366-4fa7-b141-fc6bb20e1f4f.png)
+
+### Korean IT company information crawling (jobplanet.co.kr)
+- Crawling IT companies info from Korean job application site
+- Data: 기업명, 평균 별점, 평균연봉, 기업 조회수, 복지 및 급여, 업무와 삶의 균형, 사내문화...etc
+- Useful for recommendation system and company analysis
+![image](https://user-images.githubusercontent.com/50603209/138049911-a0d27238-c79c-4c0d-84b1-793e345ae036.png)
 
