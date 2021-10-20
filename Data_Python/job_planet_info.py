@@ -34,25 +34,6 @@ def wait_elements_ready(_driver: webdriver, xpath: str, wait: int = WAIT_TIME) -
 EXCEL_FILE = 'job_planet.xlsx'
 
 
-def save(lv_df):
-    lv_wb = load_workbook(EXCEL_FILE)
-    lv_ws = lv_wb['Sheet1']
-    lv_last_row = lv_ws.max_row
-    for lv_i, lv_row in lv_df.iterrows():
-        lv_ws.cell(lv_last_row + lv_i + 1, 1).value = lv_row['평균 별점']
-        lv_ws.cell(lv_last_row + lv_i + 1, 2).value = lv_row["평균연봉"]
-        lv_ws.cell(lv_last_row + lv_i + 1, 3).value = lv_row["복지 및 급여"]
-        lv_ws.cell(lv_last_row + lv_i + 1, 4).value = lv_row['업무와 삶의 균형']
-        lv_ws.cell(lv_last_row + lv_i + 1, 5).value = lv_row['승진 기회 및 가능성']
-        lv_ws.cell(lv_last_row + lv_i + 1, 6).value = lv_row['경영진']
-        lv_ws.cell(lv_last_row + lv_i + 1, 7).value = lv_row['기업 추천율']
-        lv_ws.cell(lv_last_row + lv_i + 1, 8).value = lv_row['CEO 지지율']
-        lv_ws.cell(lv_last_row + lv_i + 1, 9).value = lv_row['성장 가능성']
-
-    lv_wb.save(EXCEL_FILE)
-    lv_wb.close()
-
-
 # 기업명
 com_name = []
 # 평균 별점
@@ -79,7 +60,7 @@ CEO_support = []
 growth_pos = []
 url = "https://www.jobplanet.co.kr/companies?industry_id=700&page="
 
-for k in range(232, 332):
+for k in range(1, 332):
     try:
         for i in range(1, 11):
             # start driver
