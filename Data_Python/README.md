@@ -45,5 +45,6 @@
 - Crawling IT companies info from Korean job application site
 - Data: 기업명, 평균 별점, 평균연봉, 기업 조회수, 복지 및 급여, 업무와 삶의 균형, 사내문화...etc
 - Useful for recommendation system and company analysis
+- Extract data in Excel file
 ![image](https://user-images.githubusercontent.com/50603209/138049911-a0d27238-c79c-4c0d-84b1-793e345ae036.png)
 
