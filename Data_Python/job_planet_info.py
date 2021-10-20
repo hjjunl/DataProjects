@@ -40,7 +40,7 @@ com_name = []
 mean_star = []
 # 평균 급여
 mean_salary = []
-# 기업 조회수
+# 기업 리뷰수
 com_review = []
 # 복지 및 급여
 welfare_salary = []
@@ -75,7 +75,7 @@ for k in range(1, 332):
                 i) + ']/div/div/dl[2]/dd[2]/a/strong'
             # 기업 평균 별점
             mean_star_check = '//*[@id="listCompanies"]/div/div[1]/section[' + str(i) + ']/div/div/dl[2]/dd[1]/span'
-           # 기업 조회수
+           # 기업 리뷰수
             com_review_check = '//*[@id="listCompanies"]/div/div[1]/section[' + str(i) + ']/div/div/dl[2]/dt'
             # 기업 상세 조회 클릭
             com_click = '//*[@id="listCompanies"]/div/div[1]/section[' + str(i) + ']/div/div/dl[1]/dt/a'
@@ -87,7 +87,7 @@ for k in range(1, 332):
                 mean_salary.append(int(wait_element_ready(driver, mean_salary_check).text.replace(',', "")))
                 # 평균 별점 저장
                 mean_star.append(float(wait_element_ready(driver, mean_star_check).text))
-                # 기업 조회수 저장
+                # 기업 리뷰수 저장
                 com_review.append(int(wait_element_ready(driver, com_review_check).text.split('개의 리뷰')[0].replace(',', "")))
                 # 기업 상세 조회 다른 화면으로 전환
                 wait_element_ready(driver, com_click).click()
@@ -102,7 +102,7 @@ for k in range(1, 332):
                 mean_salary.append(int(wait_element_ready(driver, mean_salary_check).text.replace(',', "")))
                 # 평균 별점 저장
                 mean_star.append(float(wait_element_ready(driver, mean_star_check).text))
-                # 기업 조회수 저장
+                # 기업 수 저장
                 com_review.append(int(wait_element_ready(driver, com_review_check).text.split('개의 리뷰')[0].replace(',', "")))
                 # 기업 상세 조회 다른 화면으로 전환
                 wait_element_ready(driver, com_click).click()
@@ -247,7 +247,7 @@ for k in range(1, 332):
             print(com_review)
         # IT는 372페이지까지 있음
         if k == 331:
-            com_dict = {'기업명': com_name, '평균 별점': mean_star, '평균연봉': mean_salary, '기업 조회수': com_review, \
+            com_dict = {'기업명': com_name, '평균 별점': mean_star, '평균연봉': mean_salary, '기업 리뷰수': com_review, \
                         '복지 및 급여': welfare_salary, '업무와 삶의 균형': work_life_balance, \
                         '사내문화': com_culture, '승진 기회 및 가능성': promotion_pos, '경영진': com_head, \
                         '기업 추천율': com_recommendation, 'CEO 지지율': CEO_support, '성장 가능성': growth_pos}
@@ -258,8 +258,9 @@ for k in range(1, 332):
 
     except Exception:
         print("program exception: 지금까지 작업했던 데이터들 우선 저장")
-        com_dict = {'기업명': com_name[0:len(mean_star) - 2], '평균 별점': mean_star[0:len(mean_star) - 2], '기업 조회수': com_review[0:len(mean_star) - 2], \
-                    '평균연봉': mean_salary[0:len(mean_star) - 2], '복지 및 급여': welfare_salary[0:len(mean_star) - 2], \
+        com_dict = {'기업명': com_name[0:len(mean_star) - 2], '평균 별점': mean_star[0:len(mean_star) - 2], '평균연봉': mean_salary[0:len(mean_star) - 2], 
+                    '기업 리뷰수': com_review[0:len(mean_star) - 2], \
+                     '복지 및 급여': welfare_salary[0:len(mean_star) - 2], \
                     '업무와 삶의 균형': work_life_balance[0:len(mean_star) - 2], \
                     '사내문화': com_culture[0:len(mean_star) - 2], '승진 기회 및 가능성': promotion_pos[0:len(mean_star) - 2],
                     '경영진': com_head[0:len(mean_star) - 2], '기업 추천율': com_recommendation[0:len(mean_star) - 2],
