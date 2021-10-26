@@ -53,3 +53,6 @@
 - cosine similarity was used
 - 2110 IT company data
 - flask application is used too check flask project
+![image](https://user-images.githubusercontent.com/50603209/138799561-f7a43981-fc1d-4fc6-bedb-c07fb950e9a8.png)
+  ![image](https://user-images.githubusercontent.com/50603209/138799591-c9e5947f-d3ca-44ec-b683-c70f6d32f5b2.png)
+
