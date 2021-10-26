@@ -21,7 +21,7 @@
 * 기업명, 평균 별점, 평균연봉, 기업 조회수, 복지 및 급여, 업무와 삶의 균형, 사내문화...etc
 * Useful for recommendation system and company analysis
 * row:3306, col: 12
-### 6. Using 5's crawling data for recommendation program
+### 6. Using jobplanet's crawling data for recommendation program
 * Using crawled data for job recommendation
 * 연봉 범위 선택 2800 5600, 평균 별점 선택, 복지 및 급여, 업무와 삶의 균형, 사내문화, 승진 기회 및 가능성, 경영진, 기업 조회: 기업 인지도, 성장 가능성, 기업 추천율, CEO 지지율
 * cosine similarity was used
