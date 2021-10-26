@@ -4,6 +4,12 @@
 * To find insight, predict future income.
 * Two types (single variable, multivariate variables)
 
+### 2. Simple prediction for new employ's salary
+* Used at flask project
+* data is hand made (no reliability)
+* random forest regression
+* data processing
+
 ## Data_Python (Automation)
 ### 1. Exchange rate ETL automation (dalily)
  * Used crawling to get exchange rate
