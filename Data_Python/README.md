@@ -59,4 +59,5 @@
   ### jobkorea_crawling&save.py (jobkorea.co.kr)
 - Check the DB first whether there is the company information you chose.
 - If there is no company information it crawls company data and save at the database automatically
+  
   (db확인후 없을 시 자동으로 크롤링 후 크롤링데이터 저장)
