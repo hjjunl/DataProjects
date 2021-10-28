@@ -56,3 +56,7 @@
 - automatically saved to database
 ![image](https://user-images.githubusercontent.com/50603209/139201623-b36fad60-e3c2-4e29-a3ac-5f62ac6ab9e8.png)
 
+  ### jobkorea_crawling&save.py (jobkorea.co.kr)
+- Check the DB first whether there is the company information you chose.
+- If there is no company information it crawls company data and save at the database automatically
+  (db확인후 없을 시 자동으로 크롤링 후 크롤링데이터 저장)
