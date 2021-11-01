@@ -1,13 +1,13 @@
-# IT 기업 추천 (Item based collaborative filtering)
+# IT company recommendation (Item based collaborative filtering)
 def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, 
                       opportunity, com_head, growth_pos_seg, com_rec_seg, CEO_sup_seg):
   
     pymysql.install_as_MySQLdb()
     engine = create_engine("mysql+mysqldb://root:" + "2000" + "@127.0.0.1:3306/testdb", encoding='utf-8')
     conn = pymysql.connect(host='127.0.0.1', user='root', db='testdb', passwd='2000', charset='utf8')
-    # 추천 할 값과 회사
+    # Recommending company
     rec_com_list = []
-    # 초기 상태
+    # First stat
     if mean_sal == '' or mean_star == '' or welfare_sal == '' or com_review_seg == '':
         rec_com_list = [['']]
     else:
@@ -26,11 +26,11 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
             data=arr)
         labels = np.arange(1, 6, 1)
 
-        # 평균 연복은 크게 5개로 나눔 cut
+        # Cut mean salary into 5 groups
         mean_sal_seg_series = pd.Series(list(pd.cut(df['mean_sal'], 5, labels=labels)),
                                         name='mean_sal_seg')  # 2800씩 등차함수
 
-        # 나머지는 각 수에 맞춰 qcut
+        # Qcut others
         com_rec_seg_series = pd.Series(list(pd.cut(df['com_rec'], 5, labels=labels)), name='com_rec_seg')
         CEO_sup_seg_series = pd.Series(list(pd.qcut(df['CEO_sup'], 5, labels=labels)), name='CEO_sup_seg')
         growth_pos_seg_series = pd.Series(list(pd.qcut(df['growth_pos'], 5, labels=labels)), name='growth_pos_seg')
@@ -41,7 +41,7 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
                         CEO_sup_seg_series], axis=1)
         df.reset_index(drop=True, inplace=True)
 
-        # 연봉 범위 정할 때
+        # Salary check
         if mean_sal >= 0 and mean_sal <= 1.5:
             df = df[(df['mean_sal_seg'] == 1)]
         if mean_sal <= 2.5 and mean_sal > 1.5:
@@ -66,7 +66,7 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
             df = df[(df['mean_star'] > 3.5) & (df['mean_star'] <= 4.5)]
         if mean_star > 4.5:
             df = df[(df['mean_star'] >= 4)]
-        # user가 선택한 값들
+        # User's result
         user_1 = [int(com_review_seg), int(welfare_sal), int(wo_la_bal), int(com_cul), int(opportunity), int(com_head),
                   int(growth_pos_seg), int(com_rec_seg), int(CEO_sup_seg)]
 
@@ -78,25 +78,28 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
                        'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg', 'CEO_sup_seg'
                        ]
                        ]
-        # 행을 잘라 list로 붙임
+        # Cut row
         com_list = []
         for i in range(len(com_df)):
             com_list.append(list(com_df.loc[i]))
 
-        # 함수 호출
+        # Funcion call
         sim = cos_sim(user_1, com_list)
+        
         for i, j in sim:
             j.insert(0, i)
             rec_com_list.append(j)
 
         print(rec_com_list)
         com_result = []
+        
         for i in rec_com_list:
             com_result.append(i[1])
         com_name = ','.join(com_result)
-        user_choice = [int(user), mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, opportunity,
-                       com_head,
-                       growth_pos_seg, com_rec_seg, CEO_sup_seg, com_name]
+        user_choice = [
+                    int(user), mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, 
+                       opportunity, com_head, growth_pos_seg, com_rec_seg, CEO_sup_seg, com_name
+                      ]
 
         sql_col = [
                   'user_id', 'mean_sal', 'mean_star', 'com_review_seg', 'welfare_sal', 'wo_la_bal', \
