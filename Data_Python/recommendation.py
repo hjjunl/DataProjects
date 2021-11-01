@@ -1,6 +1,7 @@
 # IT 기업 추천 (Item based collaborative filtering)
-def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, opportunity, com_head,
-                      growth_pos_seg, com_rec_seg, CEO_sup_seg):
+def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo_la_bal, com_cul, 
+                      opportunity, com_head, growth_pos_seg, com_rec_seg, CEO_sup_seg):
+  
     pymysql.install_as_MySQLdb()
     engine = create_engine("mysql+mysqldb://root:" + "2000" + "@127.0.0.1:3306/testdb", encoding='utf-8')
     conn = pymysql.connect(host='127.0.0.1', user='root', db='testdb', passwd='2000', charset='utf8')
@@ -71,9 +72,12 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
 
         com_df = df.drop(['CEO_sup', 'com_rec', 'growth_pos', 'com_review', 'mean_sal_seg', 'com_relation'], axis=1)
         com_df.reset_index(drop=True, inplace=True)
-        com_df = com_df[['id', 'com_name', 'mean_star', 'com_review_seg', 'mean_sal', 'welfare_sal', 'wo_la_bal', \
-                         'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg',
-                         'CEO_sup_seg']]
+        com_df = com_df[
+                       [
+                       'id', 'com_name', 'mean_star', 'com_review_seg', 'mean_sal', 'welfare_sal', 'wo_la_bal', \
+                       'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg', 'CEO_sup_seg'
+                       ]
+                       ]
         # 행을 잘라 list로 붙임
         com_list = []
         for i in range(len(com_df)):
@@ -94,9 +98,10 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
                        com_head,
                        growth_pos_seg, com_rec_seg, CEO_sup_seg, com_name]
 
-        sql_col = ['user_id', 'mean_sal', 'mean_star', 'com_review_seg', 'welfare_sal', 'wo_la_bal', \
-                   'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg',
-                   'CEO_sup_seg', 'com_result']
+        sql_col = [
+                  'user_id', 'mean_sal', 'mean_star', 'com_review_seg', 'welfare_sal', 'wo_la_bal', \
+                  'com_cul', 'opportunity', 'com_head', 'growth_pos_seg', 'com_rec_seg', 'CEO_sup_seg', 'com_result'
+                  ]
         user_choice = tuple(user_choice)
 
         df = pd.DataFrame([user_choice], columns=sql_col)
