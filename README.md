@@ -10,6 +10,12 @@
 * random forest regression
 * data processing
 
+### 3. Bicycle rent prediction
+* This dataset soure is from https://dacon.io/competitions/official/235837/data
+* This program is about predicting future rental numbers of bicycles at Seoul Korea.
+* It's just personal toy project for ML.
+
+
 ## Data_Python (Automation)
 ### 1. Exchange rate ETL automation (dalily)
  * Used crawling to get exchange rate
