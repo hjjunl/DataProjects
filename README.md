@@ -15,7 +15,10 @@
 * This program is about predicting future rental numbers of bicycles at Seoul Korea.
 * It's just personal toy project for ML.
 
-
+### 4. NH stock prediction
+* This dataset is forbidden to use so only the code remains.
+* Used the outer variables such as PER, PBR, KRX...etc
+* It's just personal toy project for ML.
 ## Data_Python (Automation)
 ### 1. Exchange rate ETL automation (dalily)
  * Used crawling to get exchange rate
