@@ -15,7 +15,8 @@
 * This program is about predicting future rental numbers of bicycles at Seoul Korea.
 * It's just personal toy project for ML.
 
-### 4. NH stock prediction
+### 4. NH stock holding period prediction (No dataset offered)
+* I failed to predict this project.
 * This dataset is forbidden to use so only the code remains.
 * Used the outer variables such as PER, PBR, KRX...etc
 * It's just personal toy project for ML.
