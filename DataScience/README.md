@@ -11,3 +11,12 @@
 - add_regression to predict 12 months
 ![image](https://user-images.githubusercontent.com/50603209/131627531-30e19baf-50e5-483c-9b38-bf52cb4a116c.png)
 
+### 3. Bicycle rental prediction
+* This dataset soure is from https://dacon.io/competitions/official/235837/data
+* This program is about predicting future rental numbers of bicycles at Seoul Korea.
+* It's just personal toy project for ML.
+
+### 4. NH stock prediction (dataset is not allowed to use)
+* This dataset is forbidden to use so only the code remains.
+* Used the outer variables such as PER, PBR, KRX...etc
+* It's just personal toy project for ML.
