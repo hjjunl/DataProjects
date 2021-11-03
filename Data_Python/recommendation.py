@@ -67,8 +67,10 @@ def job_recomendation(user, mean_sal, mean_star, com_review_seg, welfare_sal, wo
         if mean_star > 4.5:
             df = df[(df['mean_star'] >= 4)]
         # User's result
-        user_1 = [int(com_review_seg), int(welfare_sal), int(wo_la_bal), int(com_cul), int(opportunity), int(com_head),
-                  int(growth_pos_seg), int(com_rec_seg), int(CEO_sup_seg)]
+        user_1 = [
+                  float(com_review_seg), float(welfare_sal), float(wo_la_bal), float(com_cul), float(opportunity), float(com_head),
+                  float(growth_pos_seg), float(com_rec_seg), float(CEO_sup_seg)
+                 ]
 
         com_df = df.drop(['CEO_sup', 'com_rec', 'growth_pos', 'com_review', 'mean_sal_seg', 'com_relation'], axis=1)
         com_df.reset_index(drop=True, inplace=True)
