@@ -1,4 +1,5 @@
 def check_com_info(com_name, com_id):
+    # DB 내 정보 유무 확인
     pymysql.install_as_MySQLdb()
     engine = create_engine("mysql+mysqldb://root:" + "2000" + "@127.0.0.1:3306/testdb", encoding='utf-8')
     conn = pymysql.connect(host='127.0.0.1', user='root', db='testdb', passwd='2000', charset='utf8')
@@ -37,7 +38,7 @@ def check_com_info(com_name, com_id):
             else:
                 url = 'https://www.jobkorea.co.kr/'
                 options = Options()
-                # 화면 안보이게
+                # 화면 유무
                 # options.add_argument("headless")
                 driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
                 driver.get(url)
@@ -180,7 +181,6 @@ def check_com_info(com_name, com_id):
                 df = pd.DataFrame([com_info_list], columns=com_current_col)
                 df.reset_index(drop=True, inplace=True)
                 print(df)
-                # html = df.to_html(index=False, justify='center')
                 conn = engine.connect()
                 df.to_sql(name='com_info', con=engine, if_exists='append', index=False)
 
