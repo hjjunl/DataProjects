@@ -2,7 +2,6 @@ import time
 from typing import List
 import pandas as pd
 import glob
-#변경할 파일들이 모여있는 경로
 from openpyxl import load_workbook
 from openpyxl.chart import (
     ScatterChart,
@@ -12,7 +11,7 @@ from openpyxl.chart import (
 start = time.time()
 #  전처리할 파일이 모여있는 경로
 file_address_local="C:/Users/20615/Desktop/python code/Python_Project/Raw file _ to IT/"
-#파일 Union, create new xlsx, 파일 번호까지
+# 파일 Union, create new xlsx, 파일 번호까지
 def file_union(local_file_address, file_num):
     file_ad = []
     dataframe_list=[]
@@ -27,7 +26,7 @@ def file_union(local_file_address, file_num):
 
         result3 = pd.concat(dff, axis=1)
         dataframe_list.append(result3)
-        #파일저장
+#파일저장
         file_ad.append("[" + str(file_num[i]) + "]" + ".xlsx")
     return file_ad, dataframe_list
 
@@ -51,26 +50,27 @@ def file_get_file_address(file_address):
             file_name.append(file.split('\\')[1].split(".CSV")[0].split('] ')[1])
     return address1, file_num
 
+
 #파일의 경로까지 읽어야함 ~~.csv까지
 def data_processing(dataframe, union_file_num):
     df=dataframe
     df = df.where(pd.notnull(df), "")
     dc=list(df.columns)
-    #첫 번째 행 데이터 저장
+#첫 번째 행 데이터 저장
     second_df=df.loc[0]
     sd=[]
     for i in range(len(second_df)):
         sd.append(second_df[i])
-    # 첫번쨰 행 제거
+# 첫번쨰 행 제거
     df = df.drop(index=0, axis=0)
-    # time columns 조회 후 데이터 변환
+# time columns 조회 후 데이터 변환
     dt=[]
     for x in df.columns[0::2]:
         dt.append(x)
     time=[]
     for i in range(len(dt)):
         time.append(list(df[dt[i]]))
-    #Hour 만 추출
+# Hour 만 추출
     time2=[]
     for k in range(len(dt)):
         time1 = []
@@ -88,15 +88,17 @@ def data_processing(dataframe, union_file_num):
 
     for i in dc:
         df[i]=pd.to_numeric(df[i])
-    # 지웠던 sd 첫번째 행 삽입
+# 지웠던 sd 첫번째 행 삽입
     new_data = dict(zip(dc, sd))
     temp1 = df[df.index < 0]
     temp2 = df[df.index >= 0]
     df = temp1.append(new_data,ignore_index=True).append(temp2, ignore_index=True)
-    #엑셀화
+# 엑셀화
     df.to_excel(excel_writer=str(union_file_num) + "_union" +".xlsx", index=False)
     file_name=str(union_file_num) + "_union" +".xlsx"
     return file_name
+
+
 # 데이터 엑셀 생성 함수
 def data_creation(file_address_local) -> List:
     # Union 데이터 생성
@@ -136,5 +138,5 @@ for d in data_creation(file_address_local):
     ws.add_chart(chart, "F5")
     wb.save("graph_" + d)
     print("graph_" + d+" DONE")
-
-print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
+# 현재시각 - 시작시간 = 실행 시간
+print("time :", time.time() - start) 
