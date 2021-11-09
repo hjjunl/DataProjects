@@ -17,7 +17,7 @@
 * It's just personal toy project for ML.
 
 ### 4. NH stock holding period prediction (dataset is not allowed to use)
-* I failed to predict the future stock holding period.
+* I failed to predict the future stock holding period. (But it was a nice experience :)
 * This dataset is forbidden to use so only the code remains.
 * Used the outer variables such as PER, PBR, KRX...etc
 * It's just personal toy project for ML.
