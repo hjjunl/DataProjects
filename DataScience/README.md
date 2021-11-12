@@ -28,3 +28,12 @@
 * mean salary, mean_star, com_review_seg, welfare_sal, work_life_balance, company_culture, promotion opportunity, company head, company growth posibility_seg, company_recommendation_seg, CEO_support_seg
 * cosine similarity was used
 * 2110 IT company data
+
+### 6. Stock prediction done by mutivariate LSTM model (FED FUNDS data)
+* Using LSTM model for prediction
+* code base line: https://github.com/vb100/multivariate-lstm/blob/master/LSTM_model_stocks.ipynb
+* get rid of the time lagging problem
+* feature extraction and external data FED FUNDS data was used
+* used yahoo finace Api to get stock dataset
+
+![image](https://user-images.githubusercontent.com/50603209/141417239-2e16d0da-aadc-4c8b-bfa1-f989e870f365.png)
