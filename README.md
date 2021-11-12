@@ -24,8 +24,17 @@
 ### 5. Using jobplanet's crawling data for recommendation program (User based collaborative filtering)
 * Using crawled data for job recommendation
 * 연봉 범위 선택 2800 5600, 평균 별점 선택, 복지 및 급여, 업무와 삶의 균형, 사내문화, 승진 기회 및 가능성, 경영진, 기업 조회: 기업 인지도, 성장 가능성, 기업 추천율, CEO 지지율
+* mean salary, mean_star, com_review_seg, welfare_sal, work_life_balance, company_culture, promotion opportunity, company head, company growth posibility_seg, company_recommendation_seg, CEO_support_seg
 * cosine similarity was used
 * 2110 IT company data
+
+### 6. Stock prediction done by mutivariate LSTM model (FED FUNDS data)
+* Using LSTM model for prediction
+* code base line: https://github.com/vb100/multivariate-lstm/blob/master/LSTM_model_stocks.ipynb
+* get rid of the time lagging problem
+* feature extraction and external data FED FUNDS data was used
+* used yahoo finace Api to get stock dataset
+
 ## Data_Python (Automation)
 ### 1. Exchange rate ETL automation (dalily)
  * Used crawling to get exchange rate
