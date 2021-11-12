@@ -31,7 +31,7 @@
 
 ### 6. Stock prediction done by mutivariate LSTM model (FED FUNDS data)
 * Using LSTM model for prediction
-* code base line: https://github.com/vb100/multivariate-lstm/blob/master/LSTM_model_stocks.ipynb
+* code base line: I used 'Vytautas Bielinskas's code as my baseline. 2020.
 * get rid of the time lagging problem
 * feature extraction and external data FED FUNDS data was used
 * used yahoo finace Api to get stock dataset
