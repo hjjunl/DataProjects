@@ -28,7 +28,7 @@
 * cosine similarity was used
 * 2110 IT company data
 
-### 6. Stock prediction done by mutivariate LSTM model (FED FUNDS data)
+### 6. Stock prediction done by mutivariate LSTM model (FED FUNDS data added)
 * Using LSTM model for prediction
 * code base line: Vytautas Bielinskas's LSTM project
 * get rid of the time lagging problem
