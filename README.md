@@ -35,6 +35,11 @@
 * feature extraction and external data FED FUNDS data was used
 * used yahoo finace Api to get stock dataset
 
+### 7. Instacart Market Basket Analysis/https://www.kaggle.com/c/instacart-market-basket-analysis/leaderboard
+* predict which previously purchased products will be in a user’s next order.
+* Model: xgboost
+* EDA and new features were made
+
 ## Data_Python (Automation)
 ### 1. Exchange rate ETL automation (dalily)
  * Used crawling to get exchange rate
