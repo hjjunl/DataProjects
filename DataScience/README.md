@@ -22,7 +22,10 @@
 * This dataset is forbidden to use so only the code remains.
 * Used the outer variables such as PER, PBR, KRX...etc
 * It's just personal toy project for ML.
-
+### Instacart Market Basket Analysis
+* Toy project to make new variables and improve the model
+* xgboost was used
+* 
 # Recommendation
 ### Using jobplanet's crawling data for recommendation program (User based collaborative filtering)
 * Using crawled data for job recommendation
