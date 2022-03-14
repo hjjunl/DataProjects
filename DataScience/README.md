@@ -1,17 +1,4 @@
-# Prophet model
-### Single variable model
-- DB is private and data forms are int(255)
-- Change DB to yours to fit the model
-- ds: date  yhat: predicted value  yhat_lower: predicted value low  yhat_upper: predicted value high in 95% range
-- Black line is the actual data, blue line is predicted data, sky blue color range is the range in 95% accuracy
-![image](https://user-images.githubusercontent.com/50603209/131627632-e13152a9-1b76-4b3b-9e6e-08e6cea4804f.png)
-
-### Multivariable model
-- Using other varible that affects cost data prediction (variable cost, fixed cost, material cost, exchange rate, interest rate)
-- add_regression to predict 12 months
-![image](https://user-images.githubusercontent.com/50603209/131627531-30e19baf-50e5-483c-9b38-bf52cb4a116c.png)
-
-# ML prediction
+# ML Prediction
 ### Bicycle rental prediction
 * This dataset soure is from https://dacon.io/competitions/official/235837/data
 * This program is about predicting future rental numbers of bicycles at Seoul Korea.
@@ -37,7 +24,8 @@
 * cosine similarity was used
 * 2110 IT company data
 
-# LSTM model
+# Time Series Analysis
+## LSTM model
 ### Stock prediction done by mutivariate LSTM model (FED FUNDS data)
 * Using LSTM model for prediction
 * code base line: I used 'Vytautas Bielinskas's code as my baseline. 2020.
@@ -46,3 +34,19 @@
 * used yahoo finace Api to get stock dataset
 
 ![image](https://user-images.githubusercontent.com/50603209/141417239-2e16d0da-aadc-4c8b-bfa1-f989e870f365.png)
+
+## Prophet Model
+### Single variable model
+- DB is private and data forms are int(255)
+- Change DB to yours to fit the model
+- ds: date  yhat: predicted value  yhat_lower: predicted value low  yhat_upper: predicted value high in 95% range
+- Black line is the actual data, blue line is predicted data, sky blue color range is the range in 95% accuracy
+
+![image](https://user-images.githubusercontent.com/50603209/131627632-e13152a9-1b76-4b3b-9e6e-08e6cea4804f.png)
+
+### Multivariable Model
+- Using other varible that affects cost data prediction (variable cost, fixed cost, material cost, exchange rate, interest rate)
+- add_regression to predict 12 months
+
+![image](https://user-images.githubusercontent.com/50603209/131627531-30e19baf-50e5-483c-9b38-bf52cb4a116c.png)
+
