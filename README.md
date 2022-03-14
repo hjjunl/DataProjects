@@ -37,9 +37,10 @@
 
 ### 7. Instacart Market Basket Analysis/https://www.kaggle.com/c/instacart-market-basket-analysis/leaderboard
 * predict which previously purchased products will be in a user’s next order.
-* Model: xgboost
+* Model: xgboost, Catboost, RandomForest, Logistic Regression ensembled
 * EDA and new features were made
 
+![image](https://user-images.githubusercontent.com/50603209/158091861-afa1800b-9263-4a31-9a5c-1c29386d874c.png)
 ## Data_Python (Automation)
 ### 1. Exchange rate ETL automation (dalily)
  * Used crawling to get exchange rate
