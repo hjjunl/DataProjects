@@ -25,7 +25,10 @@
 ### Instacart Market Basket Analysis
 * predict which previously purchased products will be in a user’s next order.
 * Toy project to make new variables and improve the model
-* xgboost was used
+* Xgboost, Catboost, RandomForest, Logistic Regression ensembled model
+
+![image](https://user-images.githubusercontent.com/50603209/158091981-35647573-eb81-4348-80c0-a5be2a78bdb6.png)
+
 # Recommendation
 ### Using jobplanet's crawling data for recommendation program (User based collaborative filtering)
 * Using crawled data for job recommendation
