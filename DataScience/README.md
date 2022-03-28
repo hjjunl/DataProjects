@@ -13,7 +13,11 @@
 * predict which previously purchased products will be in a user’s next order.
 * Toy project to make new variables and improve the model
 * Xgboost, Catboost, RandomForest, Logistic Regression ensembled model
-![image](https://user-images.githubusercontent.com/50603209/159405944-1c0d4ecb-8762-4975-a605-aaa25f208335.png)
+* Used F1 Score optimization to get over F1 0.37 Score
+
+![image](https://user-images.githubusercontent.com/50603209/160340045-9316b13a-8e61-4852-9e3a-96f6c0b0c398.png)
+![image](https://user-images.githubusercontent.com/50603209/160340107-273300f4-f1eb-40b8-a173-66ec5ffc373c.png)
+
 
 # Recommendation
 ### Using jobplanet's crawling data for recommendation program (User based collaborative filtering)
