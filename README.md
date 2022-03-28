@@ -39,8 +39,10 @@
 * predict which previously purchased products will be in a user’s next order.
 * Model: xgboost, Catboost, RandomForest, Logistic Regression ensembled
 * EDA and new features were made
+* Used F1 Optimization to improve the F1 Score
 
-![image](https://user-images.githubusercontent.com/50603209/158091861-afa1800b-9263-4a31-9a5c-1c29386d874c.png)
+![image](https://user-images.githubusercontent.com/50603209/160340241-2e024138-fa63-438c-91eb-8d906e4b2017.png)
+
 ## Data_Python (Automation)
 ### 1. Exchange rate ETL automation (dalily)
  * Used crawling to get exchange rate
